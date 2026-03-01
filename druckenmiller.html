@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stanley Druckenmiller — A Synthesis of Teachings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400;1,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── Reset & Base ─────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:       #020617;
+    --navy:      #0F172A;
+    --cobalt:    #1E3A8A;
+    --gold:      #CA8A04;
+    --gold-lt:   #FDE68A;
+    --slate:     #475569;
+    --mist:      #F8FAFC;
+    --rule:      #E2E8F0;
+    --serif:     'Libre Bodoni', Georgia, serif;
+    --sans:      'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  html { font-size: 10.5pt; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ─── Print Setup ───────────────────────────────────── */
+  @page {
+    size: Letter;
+    margin: 0;
+  }
+
+  @page :first { margin: 0; }
+
+  @media print {
+    .no-print { display: none !important; }
+    .page-break { break-before: page; }
+    .avoid-break { break-inside: avoid; }
+  }
+
+  /* ─── COVER PAGE ────────────────────────────────────── */
+  .cover {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  /* Gold geometric accent lines */
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0%, #92400E 60%, transparent 100%);
+  }
+
+  .cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(202,138,4,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(202,138,4,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Radial glow */
+  .cover-glow {
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(30,58,138,0.6) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-header {
+    padding: 48px 60px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cover-label {
+    font-family: var(--sans);
+    font-size: 7.5pt;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.9;
+  }
+
+  .cover-date {
+    font-family: var(--sans);
+    font-size: 7.5pt;
+    font-weight: 400;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  .cover-body {
+    padding: 0 60px;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cover-eyebrow {
+    font-family: var(--sans);
+    font-size: 7pt;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0.85;
+  }
+
+  .cover-title {
+    font-family: var(--serif);
+    font-size: 52pt;
+    font-weight: 700;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    max-width: 560px;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--gold-lt);
+  }
+
+  .cover-subtitle {
+    font-family: var(--sans);
+    font-size: 12pt;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+    margin-top: 18px;
+    max-width: 460px;
+    line-height: 1.6;
+  }
+
+  .cover-rule {
+    width: 56px;
+    height: 2px;
+    background: var(--gold);
+    margin: 32px 0;
+    opacity: 0.8;
+  }
+
+  .cover-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 8px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 700;
+    color: var(--gold-lt);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--sans);
+    font-size: 7pt;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .cover-footer {
+    padding: 36px 60px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .cover-byline {
+    font-family: var(--sans);
+    font-size: 7.5pt;
+    font-weight: 400;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+  }
+
+  .cover-pgnum {
+    font-family: var(--sans);
+    font-size: 7.5pt;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ─── CONTENT PAGES ─────────────────────────────────── */
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 72px;
+  }
+
+  /* Running header */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 48px;
+  }
+
+  .page-header-title {
+    font-family: var(--sans);
+    font-size: 7pt;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  .page-header-num {
+    font-family: var(--sans);
+    font-size: 7pt;
+    color: rgba(0,0,0,0.3);
+    letter-spacing: 0.08em;
+  }
+
+  /* Section headings */
+  .section-label {
+    font-family: var(--sans);
+    font-size: 6.5pt;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: 28pt;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    margin-top: 40px;
+    margin-bottom: 14px;
+  }
+
+  h3 {
+    font-family: var(--sans);
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+    margin-top: 26px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 9.5pt;
+    line-height: 1.72;
+    color: #1E293B;
+    margin-bottom: 12px;
+    max-width: 64ch;
+  }
+
+  /* Pull quote */
+  .pullquote {
+    border-left: 3px solid var(--gold);
+    margin: 32px 0;
+    padding: 4px 24px;
+    background: #FFFBEB;
+  }
+
+  .pullquote p {
+    font-family: var(--serif);
+    font-size: 12pt;
+    font-style: italic;
+    color: #92400E;
+    line-height: 1.6;
+    max-width: none;
+    margin: 0;
+  }
+
+  .pullquote cite {
+    display: block;
+    font-family: var(--sans);
+    font-size: 7pt;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 8px;
+    opacity: 0.8;
+  }
+
+  /* Principle cards */
+  .principle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .principle-card {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 18px 20px;
+    background: var(--mist);
+    position: relative;
+  }
+
+  .principle-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 700;
+    color: rgba(202,138,4,0.12);
+    line-height: 1;
+  }
+
+  .principle-card h3 {
+    margin-top: 0;
+    font-size: 8.5pt;
+    color: var(--navy);
+  }
+
+  .principle-card p {
+    font-size: 8pt;
+    line-height: 1.6;
+    color: var(--slate);
+    margin: 0;
+  }
+
+  /* Key quote callout */
+  .quote-callout {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+
+  .quote-callout p {
+    font-family: var(--serif);
+    font-size: 11pt;
+    font-style: italic;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.88);
+    max-width: none;
+    margin: 0;
+  }
+
+  .quote-callout cite {
+    display: block;
+    font-family: var(--sans);
+    font-size: 7pt;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 14px;
+    opacity: 0.85;
+  }
+
+  /* Horizontal rule */
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 36px 0;
+  }
+
+  /* Numbered list */
+  ol {
+    padding-left: 20px;
+    margin: 12px 0;
+  }
+
+  ol li {
+    font-size: 9.5pt;
+    line-height: 1.7;
+    color: #1E293B;
+    margin-bottom: 6px;
+    padding-left: 4px;
+  }
+
+  ol li strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* Two-column text */
+  .two-col {
+    columns: 2;
+    column-gap: 32px;
+  }
+
+  .two-col p { max-width: none; }
+
+  /* Stat bar */
+  .stat-bar {
+    display: flex;
+    gap: 0;
+    margin: 28px 0;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .stat-cell {
+    flex: 1;
+    padding: 18px 20px;
+    border-right: 1px solid var(--rule);
+    background: var(--mist);
+  }
+
+  .stat-cell:last-child { border-right: none; }
+
+  .stat-cell-num {
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-cell-num span {
+    color: var(--gold);
+  }
+
+  .stat-cell-label {
+    font-family: var(--sans);
+    font-size: 7pt;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  /* Framework table */
+  .framework {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 8.5pt;
+  }
+
+  .framework thead tr {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .framework thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 7pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .framework thead th:first-child {
+    border-radius: 4px 0 0 0;
+  }
+
+  .framework thead th:last-child {
+    border-radius: 0 4px 0 0;
+  }
+
+  .framework tbody tr {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .framework tbody tr:nth-child(even) {
+    background: var(--mist);
+  }
+
+  .framework tbody td {
+    padding: 9px 14px;
+    vertical-align: top;
+    color: #1E293B;
+    line-height: 1.5;
+  }
+
+  .framework tbody td:first-child {
+    font-weight: 600;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+
+  .tag {
+    display: inline-block;
+    background: rgba(202,138,4,0.12);
+    color: var(--gold);
+    border-radius: 2px;
+    padding: 1px 6px;
+    font-size: 6.5pt;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Closing page */
+  .closing {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+    page-break-before: always;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold) 40%, #92400E 100%);
+  }
+
+  .closing-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(202,138,4,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(202,138,4,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .closing-rule {
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin: 28px auto;
+  }
+
+  .closing-headline {
+    font-family: var(--serif);
+    font-size: 32pt;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 480px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .closing-headline em {
+    font-style: italic;
+    color: var(--gold-lt);
+  }
+
+  .closing-sub {
+    font-family: var(--sans);
+    font-size: 10pt;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.65;
+    max-width: 380px;
+    margin-top: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .closing-label {
+    font-family: var(--sans);
+    font-size: 7pt;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Print: page break helpers */
+  .section-page { page-break-before: always; }
+  .section-page:first-of-type { page-break-before: avoid; }
+
+  @media screen {
+    body { background: #d1d5db; }
+    .cover, .content-page, .closing {
+      max-width: 816px;
+      margin: 32px auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .content-page { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     COVER
+═══════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+
+  <div class="cover-header">
+    <span class="cover-label">Investment Intelligence</span>
+    <span class="cover-date">March 2026</span>
+  </div>
+
+  <div class="cover-body">
+    <p class="cover-eyebrow">A Synthesis of Teachings</p>
+    <h1 class="cover-title">Stanley<br><em>Druckenmiller</em></h1>
+    <div class="cover-rule"></div>
+    <p class="cover-subtitle">
+      Thirty years. No losing years. Compiled from his most significant interviews, transcripts, and published remarks — the complete framework of the greatest macro investor of all time.
+    </p>
+
+    <div class="cover-stats">
+      <div class="stat">
+        <span class="stat-num">~30%</span>
+        <span class="stat-label">Annual Return</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">30+</span>
+        <span class="stat-label">Years of Compounding</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">0</span>
+        <span class="stat-label">Losing Years</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <span class="cover-byline">Synthesized from public interviews &amp; transcripts</span>
+    <span class="cover-pgnum">Cover</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 2 — WHO HE IS + CORE PHILOSOPHY
+═══════════════════════════════════════════════════════ -->
+<div class="content-page" style="padding: 64px 72px; max-width: 816px; margin: 0 auto; page-break-after: always;">
+  <div class="page-header">
+    <span class="page-header-title">Stanley Druckenmiller — Teachings</span>
+    <span class="page-header-num">01</span>
+  </div>
+
+  <div class="section-label">Background</div>
+  <h1>The Record That<br>Defines the Framework</h1>
+
+  <div class="stat-bar">
+    <div class="stat-cell">
+      <div class="stat-cell-num">~<span>30</span>%</div>
+      <div class="stat-cell-label">Avg. Annual Return</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-cell-num"><span>30</span>+</div>
+      <div class="stat-cell-label">Years Compounding</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-cell-num"><span>0</span></div>
+      <div class="stat-cell-label">Losing Years</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-cell-num"><span>$1B</span></div>
+      <div class="stat-cell-label">→ $15B on GBP Trade</div>
+    </div>
+  </div>
+
+  <p>
+    Stanley Druckenmiller managed the Quantum Fund alongside George Soros, then ran Duquesne Capital Management until closing to outside investors in 2010. His record is unique in financial history: three decades of roughly 30% annual compounding without a single down year. His framework is not a collection of tips — it is a unified system built on capital preservation, asymmetric conviction, and macroeconomic foresight.
+  </p>
+
+  <hr>
+
+  <div class="section-label">Core Philosophy</div>
+  <h2>I. The Four Pillars</h2>
+
+  <div class="principle-grid avoid-break">
+    <div class="principle-card" data-num="1">
+      <h3>Never Invest in the Present</h3>
+      <p>Visualize where price will be 18 months from now. Markets discount the future, not the present. By the time consensus recognizes a trend, the trade is over.</p>
+    </div>
+    <div class="principle-card" data-num="2">
+      <h3>Liquidity Drives Everything</h3>
+      <p>The Federal Reserve and central bank policy — not earnings — move the overall market. Focus on liquidity flows before any other analysis.</p>
+    </div>
+    <div class="principle-card" data-num="3">
+      <h3>Concentrate When Certain</h3>
+      <p>Diversification hedges ignorance. One or two exceptional opportunities arise each year. When they do, concentration is the only rational response.</p>
+    </div>
+    <div class="principle-card" data-num="4">
+      <h3>Preserve Capital First</h3>
+      <p>A 50% loss requires a 100% gain to recover. The record was built as much by what Druckenmiller <em>didn't</em> lose as by what he earned.</p>
+    </div>
+  </div>
+
+  <div class="quote-callout avoid-break">
+    <p>"Never, ever invest in the present. It doesn't matter what a company's earning, what they have earned. You have to visualize the situation 18 months from now, and whatever that is, that's where the price will be, not where it is today."</p>
+    <cite>— Stanley Druckenmiller</cite>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 3 — RISK MANAGEMENT
+═══════════════════════════════════════════════════════ -->
+<div class="content-page" style="padding: 64px 72px; max-width: 816px; margin: 0 auto; page-break-after: always;">
+  <div class="page-header">
+    <span class="page-header-title">Stanley Druckenmiller — Teachings</span>
+    <span class="page-header-num">02</span>
+  </div>
+
+  <div class="section-label">Risk Management</div>
+  <h2>II. The Risk Framework</h2>
+
+  <p>
+    Druckenmiller's risk management is not mathematical. He doesn't rely on VAR models or correlation matrices — he monitors P&amp;L daily, treating each day's performance as the most honest early-warning signal available. This 30-year practice, he argues, provides superior warning compared to any model that fails during systemic stress.
+  </p>
+
+  <table class="framework avoid-break">
+    <thead>
+      <tr>
+        <th>Rule</th>
+        <th>Principle</th>
+        <th>Why It Works</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Downside First</td>
+        <td>Before any trade, calculate maximum potential loss</td>
+        <td>Forces honest position sizing before optimism sets in</td>
+      </tr>
+      <tr>
+        <td>Cut Fast</td>
+        <td>Exit without ego when thesis breaks</td>
+        <td>Stubbornness causes catastrophic blowups; speed limits losses</td>
+      </tr>
+      <tr>
+        <td>Asymmetric Bets</td>
+        <td>Size up only when downside is low &amp; reward is high</td>
+        <td>The engine of long-run compounding</td>
+      </tr>
+      <tr>
+        <td>Press Winners</td>
+        <td>Add to positions when performing well</td>
+        <td>Profit cushion allows more aggressive sizing</td>
+      </tr>
+      <tr>
+        <td>Bunt When Cold</td>
+        <td>Shrink positions during losing streaks</td>
+        <td>Rebuild rhythm before swinging for fences again</td>
+      </tr>
+      <tr>
+        <td>No Hedges</td>
+        <td>If a position needs hedging, size it correctly instead</td>
+        <td>Hedges mask poor positioning; fix the root problem</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pullquote avoid-break">
+    <p>"I don't really like hedging. To me, if something needs to be hedged, you shouldn't have a position in it."</p>
+    <cite>— Stanley Druckenmiller</cite>
+  </div>
+
+  <h3>On Being a "Pig"</h3>
+  <p>
+    Conventional wisdom says "bulls make money, bears make money, pigs get slaughtered." Druckenmiller inverts this. His framework treats excessive caution as its own form of failure. When conviction is high and risk/reward is exceptional — Soros's lesson from the British Pound trade — the obligation is to press the bet, not moderate it.
+  </p>
+
+  <div class="quote-callout avoid-break">
+    <p>"The way to build superior long-term returns is through preservation of capital and home runs. You can be far more aggressive when you're making good decisions because you're thinking clearly."</p>
+    <cite>— Stanley Druckenmiller</cite>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 4 — MACRO FRAMEWORK
+═══════════════════════════════════════════════════════ -->
+<div class="content-page" style="padding: 64px 72px; max-width: 816px; margin: 0 auto; page-break-after: always;">
+  <div class="page-header">
+    <span class="page-header-title">Stanley Druckenmiller — Teachings</span>
+    <span class="page-header-num">03</span>
+  </div>
+
+  <div class="section-label">Macro Framework</div>
+  <h2>III. How He Reads the World</h2>
+
+  <p>
+    Druckenmiller begins every investment thesis with macroeconomics. He grades himself "A+" in macro. The core of this framework: central banks and liquidity are the primary drivers of all asset classes. Earnings, valuations, and fundamentals are secondary — they matter only in the context of the liquidity environment surrounding them.
+  </p>
+
+  <h3>The "Three Death Nails" Signal</h3>
+  <p>
+    When interest rates, the US dollar, and oil prices all rise simultaneously, Druckenmiller treats it as a high-conviction warning for risk assets. The combination tightens financial conditions on every axis at once: borrowing costs rise, global liquidity contracts, and input costs increase. He avoids new long positions when all three are moving against risk assets.
+  </p>
+
+  <h3>Currency Trends Run for Years</h3>
+  <p>
+    Once a currency trend is established and exceeds 10 months of persistence, it tends to continue for years. He identifies these inflection points by tracking relative monetary policy divergence between central banks — the underlying engine of the 1992 British Pound trade, where the mismatch between German and UK monetary policy created a structural, not merely cyclical, opportunity.
+  </p>
+
+  <h3>M2 vs. Nominal GDP</h3>
+  <p>
+    When M2 money supply growth significantly exceeds nominal GDP growth, inflation is the predictable result — regardless of what official forecasts say. In 2020–21, US M2 growth exceeded nominal GDP growth by over 25%, driven by transfer payments rather than productive investment. He positioned for inflation when consensus was still debating its likelihood.
+  </p>
+
+  <h3>Asset Bubbles Precede Deflation</h3>
+  <p>
+    Historical pattern: speculative bubbles always burst before a deflationary episode. Watching for late-stage bubble dynamics — momentum-driven retail participation, valuation detachment from any earnings model, parabolic price action — is a leading indicator of the deflationary contraction that follows.
+  </p>
+
+  <div class="pullquote avoid-break">
+    <p>"Earnings don't move the overall market; it's the Federal Reserve Board. Whatever I do, focus on the central banks and focus on the movement of liquidity — most people in the market are looking for earnings and conventional measures."</p>
+    <cite>— Stanley Druckenmiller</cite>
+  </div>
+
+  <h3>The Fiscal Threat (Current)</h3>
+  <p>
+    Running a 7% budget deficit at full employment is, in his words, "unheard of." At full employment, deficit spending doesn't stimulate — it competes directly with private investment for capital, structurally elevating real interest rates and crowding out the innovation that would otherwise occur. He considers US fiscal trajectory the most significant macro risk of the current era.
+  </p>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 5 — PSYCHOLOGY + WHAT MAKES GREAT INVESTORS
+═══════════════════════════════════════════════════════ -->
+<div class="content-page" style="padding: 64px 72px; max-width: 816px; margin: 0 auto; page-break-after: always;">
+  <div class="page-header">
+    <span class="page-header-title">Stanley Druckenmiller — Teachings</span>
+    <span class="page-header-num">04</span>
+  </div>
+
+  <div class="section-label">Investor Psychology</div>
+  <h2>IV. What Separates Great Investors</h2>
+
+  <div class="two-col">
+    <p>
+      Druckenmiller is explicit about what he looks for when backing other money managers: passion, bear market performance, intellectual humility, and integrity — in that order. Above a threshold IQ, obsessive immersion in markets beats raw intelligence.
+    </p>
+    <p>
+      The greatest investors, he observes, constantly discuss their mistakes. Those who claim near-perfection consistently underperform. The ability to metabolize failure — to treat a $3 billion loss as a lesson rather than a wound — is what separates compounders from pretenders.
+    </p>
+  </div>
+
+  <hr>
+
+  <h3>The Four Traits He Backs</h3>
+  <ol>
+    <li><strong>Passion.</strong> Genuine enthusiasm creates the obsessive edge needed to compete against others working 80 hours a week. Monetary motivation alone is insufficient.</li>
+    <li><strong>Bear Market Competence.</strong> Review the manager's performance during downturns, not bull markets. Anyone can make money in a rising tide.</li>
+    <li><strong>Intellectual Humility.</strong> Great investors are the first to admit when they're wrong. Those claiming perfection underperform.</li>
+    <li><strong>Integrity.</strong> The non-negotiable foundation. Passion without ethics becomes a vehicle for harm.</li>
+  </ol>
+
+  <hr>
+
+  <div class="section-label">Mental Flexibility</div>
+  <h3>The Willingness to Be Wrong and Move</h3>
+  <p>
+    The ability to change one's mind quickly — when facts change — is the most valuable psychological trait in markets. Conviction must not become rigidity. Druckenmiller reversed his view on China, technology, the dollar, and dozens of macro positions as evidence shifted. Changing one's mind in response to new information is not weakness. It is the core skill.
+  </p>
+
+  <div class="quote-callout avoid-break">
+    <p>"One of the reasons for my success was open-mindedness to various asset classes. It gives you the discipline to not play when you shouldn't be playing."</p>
+    <cite>— Stanley Druckenmiller</cite>
+  </div>
+
+  <h3>Asset Class Flexibility as Discipline</h3>
+  <p>
+    Being willing to trade equities, bonds, currencies, and commodities is not merely an opportunity-seeker's advantage. It is a discipline. When you can invest anywhere, you can only play where the odds are genuinely favorable. Investors constrained to a single asset class are forced to deploy capital even when their asset class offers poor risk/reward.
+  </p>
+
+  <div class="pullquote avoid-break">
+    <p>"I like putting all my eggs in one basket and then watching the basket very carefully."</p>
+    <cite>— Stanley Druckenmiller</cite>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 6 — LESSONS, MENTORS, AI VIEW
+═══════════════════════════════════════════════════════ -->
+<div class="content-page" style="padding: 64px 72px; max-width: 816px; margin: 0 auto; page-break-after: always;">
+  <div class="page-header">
+    <span class="page-header-title">Stanley Druckenmiller — Teachings</span>
+    <span class="page-header-num">05</span>
+  </div>
+
+  <div class="section-label">Career Lessons</div>
+  <h2>V. Mentors, Mistakes &amp; AI</h2>
+
+  <h3>Choose Mentors Over Salary</h3>
+  <p>
+    Early in his career, Druckenmiller deliberately took lower-paying positions to work under better investors. His reasoning: the compounding of knowledge from great mentors far exceeds any salary differential, especially in the early years when the learning curve is steepest.
+  </p>
+
+  <h3>Two Lessons from His First Mentor</h3>
+  <ol>
+    <li><strong>The Fed and liquidity drive markets — not earnings.</strong> This became the spine of his entire macro framework.</li>
+    <li><strong>Always look 18 months forward, not at present conditions.</strong> Investing in the present is the most common and most expensive mistake in markets.</li>
+  </ol>
+
+  <h3>What Soros Added</h3>
+  <p>
+    Soros cemented a final piece: when you are right and the risk/reward is extreme, you are <em>obligated</em> to press the bet. On the British Pound trade, Druckenmiller had already committed $1.5 billion. Soros asked why he wasn't putting on five times more. The position ultimately reached $15 billion. Not pressing when you have overwhelming conviction is, itself, a failure of discipline.
+  </p>
+
+  <hr>
+
+  <div class="section-label">Hard Lessons</div>
+  <h3>The Dot-Com Catastrophe (1999–2000)</h3>
+  <p>
+    Druckenmiller shorted internet stocks with $200 million and was correct — temporarily losing $600 million as stocks continued upward. He then capitulated to FOMO, abandoning his own thesis to buy $6 billion in tech stocks at the peak, and ultimately lost approximately $3 billion. His assessment: a textbook violation of every principle he had built over 30 years. Emotional investing, even by the most experienced practitioners, destroys returns.
+  </p>
+
+  <div class="pullquote avoid-break">
+    <p>"I bought $6 billion worth of tech stocks, and in six weeks I had lost $3 billion in the stock market. [...] I could give you a list of a hundred times I've broken my rules, and every time I did, I lost money."</p>
+    <cite>— Stanley Druckenmiller</cite>
+  </div>
+
+  <hr>
+
+  <div class="section-label">Current Outlook</div>
+  <h3>On AI: Over-Hyped Now, Under-Hyped Long-Term</h3>
+  <p>
+    Druckenmiller is a long-term structural bull on artificial intelligence, comparing its trajectory to the early internet — transformative certainty, unclear near-term market leadership. He has invested in AI infrastructure rather than pure application bets, and has noted that excessive US fiscal spending risks crowding out the private capital that would otherwise accelerate AI's full potential. His caution: the short-term hype cycle may be ahead of near-term fundamentals, but the 10-year case is underestimated.
+  </p>
+
+  <div class="quote-callout avoid-break">
+    <p>"AI might be a little over-hyped now, but under-hyped long term. It's not unlike the early internet era — the transformation is certain; the near-term leaders are not."</p>
+    <cite>— Stanley Druckenmiller, CNBC, May 2024</cite>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     CLOSING
+═══════════════════════════════════════════════════════ -->
+<div class="closing">
+  <div class="closing-grid"></div>
+  <span class="closing-label" style="position:relative;z-index:2;">The Unifying Principle</span>
+  <div class="closing-rule"></div>
+  <h2 class="closing-headline">Asymmetry,<br>Executed with<br><em>Discipline.</em></h2>
+  <p class="closing-sub">
+    Find asymmetric situations. Size them correctly. Exit ruthlessly when wrong. Press hard when right. Capital preservation and home runs are not in tension — they are the same strategy.
+  </p>
+  <div class="closing-rule"></div>
+  <span class="closing-label" style="position:relative;z-index:2;margin-top:8px;">March 2026 · Synthesized from Public Interviews &amp; Transcripts</span>
+</div>
+
+</body>
+</html>
